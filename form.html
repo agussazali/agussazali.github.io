@@ -3,27 +3,46 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body>
-	
 	<br/><br/><br/>
 	<div class="row">
-		<center>Silahkan Tinggalkan Pesan</center>
+		<center>silahkan tinggalkan</center>
 		<div class="col-md-4"></div>
 		<div class="col-md-4">
-			<form action='kirim.php' method='post'>
+			<form name="wpu-contact-form">
 				<div class="form-group">
-					<label >Nama</label>
+					<label >Nama Lengkap</label>
 					<input type="text" class="form-control" name="nama">
 				</div>
 				<div class="form-group">
 					<label >Email</label>
-					<input type="text" class="form-control" name="usermail"></div>
+					<input type="text" class="form-control" name="email"></div>
 				<div class="form-group">
 					<label >pesan</label>
-					<input type="text" class="form-control" name="alamat">
+					<textarea class="form-control" id="pesan" name="pesan"></textarea>
 				</div>
-					<button type='Submit'>Submit</button>
+					<button type="submit" class="btn btn-primary btn-kirim">kirim</button>
+
 				</form>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzZeHrUWf2f3oPsyekNK95sewxToXcCKJEmW-TejfOKeCvz22Dj62WivsipXhoh1jcFFg/exec'
+  const form = document.forms['wpu-contact-form']
+  const btnKirim = document.querySelector('.btn-kirim')
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => {
+      	//reset form
+      	form.reset();
+      	console.log('Success!', response)
+      })
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
+
 			</div>
 </div>
+
+
 </body>
 </html>
